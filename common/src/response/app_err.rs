@@ -1,11 +1,10 @@
-use utoipa::ToSchema;
-use std::num::ParseFloatError;
-use actix_web::ResponseError;
+use crate::response::MessageResponse;
 use actix_web::http::StatusCode;
 use actix_web::HttpResponse;
+use actix_web::ResponseError;
 use sea_orm::DbErr;
-use crate::response::MessageResponse;
-
+use std::num::ParseFloatError;
+use utoipa::ToSchema;
 
 #[derive(Debug, thiserror::Error, ToSchema)]
 pub enum AppError {
@@ -51,7 +50,7 @@ impl AppError {
 
     pub fn error(&self) -> String {
         match self {
-            Self::DbError(_) =>"db error".to_string(),
+            Self::DbError(_) => "db error".to_string(),
             Self::NotFound(_) => "NOT_FOUND".to_string(),
             Self::PermissionDenied(_) => "PERMISSION_DENIED".to_string(),
             Self::UserBlocked(_) => "USER_BLOCKED".to_string(),
@@ -91,9 +90,9 @@ impl AppError {
             Self::AlreadyExists(_) => StatusCode::from_u16(403).unwrap(),
             Self::Conflict(_) | Self::UserNotActive(_) => StatusCode::from_u16(409).unwrap(), // Conflict
             Self::InvalidInput(_) => StatusCode::from_u16(422).unwrap(), //Unprocessable Entity
-            Self::Unauthorized(_)
-            | Self::InvalidSession(_)
-            | Self::SessionNotExist(_) => StatusCode::UNAUTHORIZED,
+            Self::Unauthorized(_) | Self::InvalidSession(_) | Self::SessionNotExist(_) => {
+                StatusCode::UNAUTHORIZED
+            }
             _ => StatusCode::INTERNAL_SERVER_ERROR,
         }
     }

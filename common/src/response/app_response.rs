@@ -1,28 +1,27 @@
-use std::fmt::{Display, Formatter};
-use std::task::{Context, Poll};
-use actix_web::{HttpRequest, HttpResponse, HttpResponseBuilder, Responder, ResponseError};
+use crate::response::AppError;
 use actix_web::body::{BodySize, BoxBody, MessageBody};
 use actix_web::http::StatusCode;
-use utoipa::ToSchema;
+use actix_web::{HttpRequest, HttpResponse, HttpResponseBuilder, Responder, ResponseError};
 use serde::Deserialize;
 use serde::Serialize;
-use crate::response::AppError;
+use std::fmt::{Display, Formatter};
+use std::task::{Context, Poll};
+use utoipa::ToSchema;
 
 pub type AppResult = Result<MessageResponse, AppError>;
 #[derive(Debug, Serialize, Deserialize, ToSchema)]
 pub struct MessageResponse {
     pub message: String,
-    pub data :Option<serde_json::Value>,
-    pub code : u16
+    pub data: Option<serde_json::Value>,
+    pub code: u16,
 }
 
-
-impl  MessageResponse {
-    pub fn new( data: Option<serde_json::Value>) -> Self {
+impl MessageResponse {
+    pub fn new(data: Option<serde_json::Value>) -> Self {
         Self {
             message: "success".into(),
             data,
-            code:StatusCode::OK.as_u16()
+            code: StatusCode::OK.as_u16(),
         }
     }
 }

@@ -12,8 +12,9 @@ sea-orm.workspace = true
 serde.workspace = true
 futures.workspace = true
 serde_json.workspace = true
-utoipa = {workspace = true}
 validator = {workspace = true}
 thiserror = {workspace = true}
 rust_decimal = {workspace = true}
 rust_decimal_macros = {workspace = true}
+utoipa-swagger-ui = {workspace = true}
+utoipa = {workspace = true}
