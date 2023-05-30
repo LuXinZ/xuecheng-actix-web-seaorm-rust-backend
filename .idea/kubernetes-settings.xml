@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="KubernetesSettings">
+    <option name="apiVersion" value="1.26" />
+    <option name="getSpecFromCluster" value="true" />
+    <specSources>
+      <SpecSource>
+        <option name="pathOrUrl" value="$USER_HOME$/Desktop/k8s/config/config" />
+      </SpecSource>
+    </specSources>
+  </component>
+</project>
