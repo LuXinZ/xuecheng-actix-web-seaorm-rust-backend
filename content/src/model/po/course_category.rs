@@ -17,7 +17,7 @@ pub struct Model {
     pub is_leaf: Option<i8>,
     #[sea_orm(ignore)]
     #[serde(skip_deserializing)]
-    pub children_tree_nodes: Vec<Model>,
+    pub children_tree_nodes: Option<Vec<Model>>,
 }
 
 #[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]

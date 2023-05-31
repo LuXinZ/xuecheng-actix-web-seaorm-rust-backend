@@ -14,7 +14,13 @@ impl CourseCategoryService {
             .filter(|category| category.parentid.eq("1"))
             .map(|menu| {
                 let mut menu = menu.clone();
-                menu.children_tree_nodes = get_childrens(&menu, &all_course_categories);
+                // menu.children_tree_nodes =
+                let node = get_childrens(&mut menu, &all_course_categories);
+                if node.is_some() {
+                    menu.children_tree_nodes = node;
+                } else {
+                    menu.children_tree_nodes = None;
+                }
                 menu
             })
             .collect::<Vec<course_category::Model>>();
@@ -23,18 +29,23 @@ impl CourseCategoryService {
     }
 }
 fn get_childrens(
-    menu: &course_category::Model,
+    menu: &mut course_category::Model,
     category_entities: &Vec<course_category::Model>,
-) -> Vec<course_category::Model> {
+) -> Option<Vec<course_category::Model>> {
     let mut menu1 = category_entities
         .iter()
         .filter(|category| category.parentid.eq(&menu.id))
         .map(|category| {
             let mut category = category.clone();
-            category.children_tree_nodes = get_childrens(&category, category_entities);
+            let node = get_childrens(&mut category, category_entities);
+            if node.is_some() {
+                menu.children_tree_nodes = node
+            } else {
+                menu.children_tree_nodes = None
+            }
             category
         })
         .collect::<Vec<course_category::Model>>();
     menu1.sort_by(|a, b| Some(a.orderby).cmp(&Some(b.orderby)));
-    menu1
+    Some(menu1)
 }
