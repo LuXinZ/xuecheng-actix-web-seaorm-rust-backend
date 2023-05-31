@@ -1,7 +1,7 @@
 use serde::{Deserialize, Serialize};
-use utoipa::{ToSchema,IntoParams};
+use utoipa::{IntoParams, ToSchema};
 
-#[derive(Deserialize, Serialize, Clone, Debug,ToSchema,IntoParams)]
+#[derive(Deserialize, Serialize, Clone, Debug, ToSchema, IntoParams)]
 pub struct PageParams {
     // 页码
     pub page_no: i32,

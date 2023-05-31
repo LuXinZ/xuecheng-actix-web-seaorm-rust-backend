@@ -2307,6 +2307,24 @@ dependencies = [
 ]
 
 [[package]]
+name = "system"
+version = "0.1.0"
+dependencies = [
+ "actix-web",
+ "common",
+ "futures",
+ "rust_decimal",
+ "rust_decimal_macros",
+ "sea-orm",
+ "serde",
+ "serde_json",
+ "thiserror",
+ "utoipa",
+ "utoipa-swagger-ui",
+ "validator",
+]
+
+[[package]]
 name = "tap"
 version = "1.0.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"

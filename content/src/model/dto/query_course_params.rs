@@ -1,8 +1,11 @@
-struct QueryCourseParamsDto {
+use serde::{Deserialize, Serialize};
+use utoipa::{IntoParams, ToSchema};
+#[derive(Deserialize, Serialize, Clone, Debug, ToSchema, IntoParams)]
+pub struct QueryCourseParamsDto {
     // 审核状态
-    audit_status: String,
+    pub audit_status: String,
     // 课程名称
-    course_name: String,
+    pub course_name: String,
     // 发布状态
-    publish_status: String,
+    pub publish_status: String,
 }
