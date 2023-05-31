@@ -15,3 +15,4 @@ validator = {version = "0.16.0", features = ["derive"]}
 thiserror ="1.0.40"
 rust_decimal = "1.29"
 rust_decimal_macros = "1.29"
+actix-cors = "0.6.4"

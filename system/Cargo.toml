@@ -18,3 +18,4 @@ rust_decimal = {workspace = true}
 rust_decimal_macros = {workspace = true}
 utoipa-swagger-ui = {workspace = true}
 utoipa = {workspace = true}
+actix-cors = {workspace = true}

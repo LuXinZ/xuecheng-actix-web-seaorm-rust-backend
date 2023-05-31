@@ -1,5 +1,5 @@
 use actix_web::{web, App, HttpServer};
-use common::AppState;
+use common::{dev_cors, AppState};
 use sea_orm::{Database, DatabaseConnection};
 use system::dictionary_controller_init;
 
@@ -11,6 +11,7 @@ async fn main() -> std::io::Result<()> {
     let state = AppState { db };
     HttpServer::new(move || {
         App::new()
+            .wrap(dev_cors())
             .configure(dictionary_controller_init)
             .app_data(web::Data::new(state.clone()))
     })

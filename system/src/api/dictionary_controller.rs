@@ -4,8 +4,11 @@ use actix_web::{get, post, web, App, HttpResponse, HttpServer, Responder};
 use common::{handle_response, AppResult, AppState};
 
 pub fn dictionary_controller_init(cfg: &mut web::ServiceConfig) {
-    cfg.service(query_all);
-    cfg.service(get_by_code);
+    cfg.service(
+        web::scope("/system")
+            .service(query_all)
+            .service(get_by_code),
+    );
 }
 #[get("/dictionary/all")]
 async fn query_all(data: web::Data<AppState>) -> AppResult {

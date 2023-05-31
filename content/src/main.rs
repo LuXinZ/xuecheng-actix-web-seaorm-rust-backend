@@ -1,5 +1,6 @@
+use actix_cors::Cors;
 use actix_web::{web, App, HttpServer};
-use common::AppState;
+use common::{dev_cors, AppState};
 use content::course_base_info_controller_init;
 use sea_orm::{Database, DatabaseConnection};
 use serde_json::Value;
@@ -36,10 +37,11 @@ async fn main() -> std::io::Result<()> {
             .service(
                 SwaggerUi::new("/swagger-ui/{_:.*}").url("/api-docs/openapi.json", openapi.clone()),
             )
+            .wrap(dev_cors())
             .app_data(web::Data::new(state.clone()))
             .configure(course_base_info_controller_init)
     })
-    .bind(("127.0.0.1", 8090))?
+    .bind(("127.0.0.1", 63040))?
     .run()
     .await
 }
