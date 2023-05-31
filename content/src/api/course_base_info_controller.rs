@@ -2,9 +2,6 @@ use crate::{CourseBaseInfoService, QueryCourseParamsDto};
 use actix_web::{get, post, web, App, HttpResponse, HttpServer, Responder};
 use common::{handle_response, AppResult, AppState, MessageResponse, PageParams};
 
-pub fn course_base_info_controller_init(cfg: &mut web::ServiceConfig) {
-    cfg.service(web::scope("/content").service(page_result));
-}
 #[utoipa::path(
 post,
 path = "/course/list/{page_no}/{page_size}",
@@ -12,7 +9,7 @@ responses((status = 200, description = "et found succesfully",),),
 params(PageParams)
 )]
 #[post("/course/list")]
-async fn page_result(
+pub async fn page_result(
     info: web::Query<PageParams>,
     course: web::Json<QueryCourseParamsDto>,
     data: web::Data<AppState>,

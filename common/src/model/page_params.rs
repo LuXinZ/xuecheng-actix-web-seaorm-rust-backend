@@ -2,6 +2,7 @@ use serde::{Deserialize, Serialize};
 use utoipa::{IntoParams, ToSchema};
 
 #[derive(Deserialize, Serialize, Clone, Debug, ToSchema, IntoParams)]
+#[serde(rename_all = "camelCase")]
 pub struct PageParams {
     // 页码
     pub page_no: i32,

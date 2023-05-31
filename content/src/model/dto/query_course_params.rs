@@ -1,6 +1,7 @@
 use serde::{Deserialize, Serialize};
 use utoipa::{IntoParams, ToSchema};
 #[derive(Deserialize, Serialize, Clone, Debug, ToSchema, IntoParams)]
+#[serde(rename_all = "camelCase")]
 pub struct QueryCourseParamsDto {
     // 审核状态
     #[serde(default)]

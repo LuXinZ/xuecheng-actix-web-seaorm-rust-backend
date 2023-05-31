@@ -2,6 +2,7 @@ use serde::{Deserialize, Serialize};
 use utoipa::{IntoParams, ToSchema};
 // 分页查询结果模型
 #[derive(Deserialize, Serialize, Clone, Debug, ToSchema, IntoParams)]
+#[serde(rename_all = "camelCase")]
 pub struct PageResult<T> {
     items: Vec<T>,
     counts: i32,

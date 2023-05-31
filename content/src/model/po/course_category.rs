@@ -5,6 +5,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Debug, PartialEq, DeriveEntityModel, Eq, Serialize, Deserialize)]
 #[sea_orm(table_name = "course_category")]
+#[serde(rename_all = "camelCase")]
 pub struct Model {
     #[sea_orm(primary_key, auto_increment = false)]
     pub id: String,
@@ -14,6 +15,9 @@ pub struct Model {
     pub is_show: Option<i8>,
     pub orderby: Option<i32>,
     pub is_leaf: Option<i8>,
+    #[sea_orm(ignore)]
+    #[serde(skip_deserializing)]
+    pub children_tree_nodes: Vec<Model>,
 }
 
 #[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]
